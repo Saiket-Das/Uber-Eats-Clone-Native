@@ -1,7 +1,8 @@
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import React from 'react'
-import HeaderTabs from '../components/HeaderTabs'
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/Home/SearchBar';
+import HeaderTabs from '../components/Home/HeaderTabs';
+import Categories from '../components/Home/Categories';
 
 export default function Home() {
     return (
@@ -10,6 +11,8 @@ export default function Home() {
                 <HeaderTabs />
                 <SearchBar />
             </View>
+
+            <Categories />
         </SafeAreaView>
     );
 };
@@ -24,6 +27,6 @@ const styles = StyleSheet.create({
     componetns: {
         backgroundColor: '#ffffff',
         padding: 15,
-        flex: 1
+        // flex: 1
     }
 });

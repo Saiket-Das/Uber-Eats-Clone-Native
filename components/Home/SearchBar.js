@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -18,7 +18,7 @@ export default function SearchBar() {
                     textInput: {
                         backgroundColor: "#eee",
                         borderRadius: 10,
-                        fontWeight: "700",
+                        fontWeight: "500",
                         marginTop: 7,
                     },
                     textInputContainer: {
@@ -34,6 +34,12 @@ export default function SearchBar() {
                     <View style={styles.locationIcon}>
                         <Ionicons name='location-sharp' size={24}></Ionicons>
                     </View>
+                )}
+
+                renderRightButton={() => (
+                    <TouchableOpacity style={styles.searchIcon}>
+                        <Ionicons name='search' size={24}></Ionicons>
+                    </TouchableOpacity>
                 )}
             />
         </View>
@@ -52,6 +58,10 @@ const styles = StyleSheet.create({
 
     locationIcon: {
         marginLeft: 10,
+    },
+
+    searchIcon: {
+        marginRight: 15
     }
 });
 
