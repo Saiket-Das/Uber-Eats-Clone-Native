@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     componetns: {
         backgroundColor: '#ffffff',
         padding: 15,
-        // flex: 1
+        flex: 1
     }
 });
