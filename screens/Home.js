@@ -4,6 +4,7 @@ import SearchBar from '../components/Home/SearchBar';
 import HeaderTabs from '../components/Home/HeaderTabs';
 import Categories from '../components/Home/Categories';
 import RestaurantItem, { localRestaurants } from '../components/Home/RestaurantItem';
+import { YELP_API_KEY } from "@env"
 
 
 
@@ -11,8 +12,7 @@ export default function Home() {
 
     const [restaurantData, setRestaurantData] = useState(localRestaurants);
     const [city, setCity] = useState('Hollywood');
-
-    const YELP_API_KEY = '72eUKhw8BshDHT47wYveSGOXyXRTV0jdxulxw8UbrpeokQn8RC4tIX-scvxeNcWHLmhfABvpdKfhyWrwju8G8OfsGJpu13XNIfcTAxcW0rUANPfQe63n2NkXB7XfYnYx';
+    const [activeTab, setActiveTab] = useState('Delivery')
 
 
     const getRestaurantsFromYelp = () => {
@@ -26,18 +26,20 @@ export default function Home() {
 
         return fetch(yelpUrl, apiOptions)
             .then(res => res.json())
-            .then(data => setRestaurantData(data.businesses))
+            .then(data => setRestaurantData(data.businesses.filter((business) =>
+                business.transactions.includes(activeTab.toLowerCase())
+            )));
     }
 
     useEffect(() => {
         getRestaurantsFromYelp();
-    }, [city])
+    }, [city, activeTab])
 
 
     return (
         <SafeAreaView style={styles.safeViewArea}>
             <View style={styles.componetns}>
-                <HeaderTabs />
+                <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
                 <SearchBar setCity={setCity} />
             </View>
 

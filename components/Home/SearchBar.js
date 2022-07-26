@@ -3,7 +3,6 @@ import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { GOOGLE_PLACES_AUTOCOMPLETE_KEY } from "@env"
-// import { GOOGLE_PLACES_AUTOCOMPLETE_KEY } from 'react-native-dotenv';
 
 
 

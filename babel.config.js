@@ -6,6 +6,7 @@ module.exports = function (api) {
       ["module:react-native-dotenv", {
         "allowlist": [
           "GOOGLE_PLACES_AUTOCOMPLETE_KEY",
+          "YELP_API_KEY",
         ]
       }]
     ]

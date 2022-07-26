@@ -3,9 +3,7 @@ import React, { useState } from 'react'
 
 
 
-export default function HeaderTabs() {
-
-    const [activeTab, setActiveTab] = useState('Delivery')
+export default function HeaderTabs({ activeTab, setActiveTab }) {
 
     return (
         <View style={styles.tabContainer}>
@@ -33,7 +31,6 @@ const HeaderButton = (props) => (
         }}
         onPress={() => props.setActiveTab(props.text)}
     >
-
         <Text
             style={{
                 ...styles.tabText,
