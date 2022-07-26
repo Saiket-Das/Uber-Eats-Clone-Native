@@ -2,9 +2,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { GOOGLE_PLACES_AUTOCOMPLETE_KEY } from "@env"
+// import { GOOGLE_PLACES_AUTOCOMPLETE_KEY } from 'react-native-dotenv';
+
+
 
 
 export default function SearchBar() {
+    console.log(GOOGLE_PLACES_AUTOCOMPLETE_KEY);
     return (
         <View
             style={{
@@ -13,7 +18,10 @@ export default function SearchBar() {
         >
 
             <GooglePlacesAutocomplete
-                query={{ key: 'AIzaSyDwoNVQxbGE_LMVNpnPhWYE0RaUByDNZr4' }}
+                query={{ key: `${GOOGLE_PLACES_AUTOCOMPLETE_KEY}` }}
+                onPress={(data, details = null) => {
+                    const city = data.description.split(',')[0];
+                }}
                 placeholder='Search'
                 styles={{
                     textInput: {

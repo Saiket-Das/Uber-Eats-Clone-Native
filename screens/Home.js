@@ -10,12 +10,13 @@ import RestaurantItem, { localRestaurants } from '../components/Home/RestaurantI
 export default function Home() {
 
     const [restaurantData, setRestaurantData] = useState(localRestaurants);
+    const [city, setCity] = useState('Hollywood');
 
     const YELP_API_KEY = '72eUKhw8BshDHT47wYveSGOXyXRTV0jdxulxw8UbrpeokQn8RC4tIX-scvxeNcWHLmhfABvpdKfhyWrwju8G8OfsGJpu13XNIfcTAxcW0rUANPfQe63n2NkXB7XfYnYx';
 
 
     const getRestaurantsFromYelp = () => {
-        const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=Hollywood`;
+        const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
 
         const apiOptions = {
             headers: {
@@ -30,14 +31,14 @@ export default function Home() {
 
     useEffect(() => {
         getRestaurantsFromYelp();
-    }, [])
+    }, [city])
 
 
     return (
         <SafeAreaView style={styles.safeViewArea}>
             <View style={styles.componetns}>
                 <HeaderTabs />
-                <SearchBar />
+                <SearchBar setCity={setCity} />
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false}>
