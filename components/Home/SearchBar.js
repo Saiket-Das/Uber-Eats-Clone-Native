@@ -13,20 +13,20 @@ export default function SearchBar() {
         >
 
             <GooglePlacesAutocomplete
+                query={{ key: 'AIzaSyDwoNVQxbGE_LMVNpnPhWYE0RaUByDNZr4' }}
                 placeholder='Search'
                 styles={{
                     textInput: {
                         backgroundColor: "#eee",
-                        borderRadius: 10,
+                        borderRadius: 20,
                         fontWeight: "500",
-                        marginTop: 0,
+                        marginTop: 7,
                     },
                     textInputContainer: {
                         backgroundColor: "#eee",
                         borderRadius: 15,
                         flexDirection: "row",
                         alignItems: "center",
-                        marginRight: 10,
                     },
                 }}
 

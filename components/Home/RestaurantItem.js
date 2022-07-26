@@ -82,14 +82,15 @@ const RestaurantInfo = ({ name, rating }) => (
 const styles = StyleSheet.create({
 
     restaurantContainer: {
-        // marginTop: 10,
+        marginTop: 5,
         padding: 15,
         backgroundColor: 'white'
     },
 
     restaurantImage: {
         width: '100%',
-        height: 220
+        height: 220,
+        borderRadius: 10,
     },
 
     heartIcon: {
