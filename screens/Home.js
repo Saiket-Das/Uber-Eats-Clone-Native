@@ -43,7 +43,7 @@ export default function Home() {
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Categories />
-                <RestaurantItem restaurantData={restaurantData} />
+                <RestaurantItem restaurantData={restaurantData} city={city} />
             </ScrollView>
         </SafeAreaView>
     );

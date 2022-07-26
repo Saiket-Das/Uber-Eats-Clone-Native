@@ -8,7 +8,7 @@ import { GOOGLE_PLACES_AUTOCOMPLETE_KEY } from "@env"
 
 
 
-export default function SearchBar() {
+export default function SearchBar({ setCity }) {
     console.log(GOOGLE_PLACES_AUTOCOMPLETE_KEY);
     return (
         <View
@@ -21,6 +21,7 @@ export default function SearchBar() {
                 query={{ key: `${GOOGLE_PLACES_AUTOCOMPLETE_KEY}` }}
                 onPress={(data, details = null) => {
                     const city = data.description.split(',')[0];
+                    setCity(city)
                 }}
                 placeholder='Search'
                 styles={{
