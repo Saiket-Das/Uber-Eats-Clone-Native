@@ -5,6 +5,8 @@ import HeaderTabs from '../components/Home/HeaderTabs';
 import Categories from '../components/Home/Categories';
 import RestaurantItem, { localRestaurants } from '../components/Home/RestaurantItem';
 import { YELP_API_KEY } from "@env"
+import { Divider } from 'react-native-elements';
+import FooterTabs from '../components/Home/FooterTabs';
 
 
 
@@ -47,6 +49,10 @@ export default function Home() {
                 <Categories />
                 <RestaurantItem restaurantData={restaurantData} city={city} />
             </ScrollView>
+
+            <Divider width={1} />
+            <FooterTabs></FooterTabs>
+
         </SafeAreaView>
     );
 };
