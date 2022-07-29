@@ -1,8 +1,9 @@
 
 import Home from './screens/Home';
+import RestaurantInfo from './screens/RestaurantInfo';
 
 export default function App() {
-  return <Home />;
+  return <RestaurantInfo />;
 }
 
 // const styles = StyleSheet.create({
