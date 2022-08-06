@@ -1,9 +1,10 @@
 
-import Home from './screens/Home';
-import RestaurantInfo from './screens/RestaurantInfo';
+import RootNavigation from './Navigation';
+// import Home from './screens/Home';
+// import RestaurantInfo from './screens/RestaurantInfo';
 
 export default function App() {
-  return <RestaurantInfo />;
+  return <RootNavigation />;
 }
 
 // const styles = StyleSheet.create({

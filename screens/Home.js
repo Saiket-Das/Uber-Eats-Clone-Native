@@ -10,7 +10,7 @@ import FooterTabs from '../components/Home/FooterTabs';
 
 
 
-export default function Home() {
+export default function Home({ navigation }) {
 
     const [restaurantData, setRestaurantData] = useState(localRestaurants);
     const [city, setCity] = useState('Hollywood');
@@ -47,7 +47,7 @@ export default function Home() {
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Categories />
-                <RestaurantItem restaurantData={restaurantData} city={city} />
+                <RestaurantItem restaurantData={restaurantData} naviagtion={navigation} />
             </ScrollView>
 
             <Divider width={1} />

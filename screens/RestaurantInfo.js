@@ -4,6 +4,8 @@ import { Divider } from 'react-native-elements/dist/divider/Divider'
 import About from '../components/RestaurantInfo/About'
 import MenuItem from '../components/RestaurantInfo/MenuItem'
 
+
+
 export default function RestaurantInfo() {
     return (
         <View>
