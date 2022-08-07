@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '600',
         marginTop: 8,
-        marginHorizontal: 10
+        marginHorizontal: 12
     },
 
     restaurantDescription: {
         fontSize: 15,
         marginTop: 5,
-        marginHorizontal: 10
+        marginHorizontal: 12
     }
 })
