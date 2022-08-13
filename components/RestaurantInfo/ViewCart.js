@@ -21,11 +21,15 @@ export default function ViewCart() {
 
                     <View style={styles.viewCartComp}>
                         <TouchableOpacity style={styles.touchableComp}>
-                            <Text style={styles.viewCartText}>View Cart {totalUSD}</Text>
+                            <Text style={styles.viewCartText}>View Cart </Text>
+                            <Text style={styles.viewCartAmount}>{totalUSD} </Text>
                         </TouchableOpacity>
                     </View>
 
-                </View> : <></>}
+                </View>
+                :
+                <></>
+            }
         </>
     )
 }
@@ -53,17 +57,27 @@ const styles = StyleSheet.create({
     },
 
     touchableComp: {
-        width: 300,
         marginTop: 20,
-        backgroundColor: 'black',
-        alignItems: 'center',
+        backgroundColor: "black",
+        alignItems: "center",
         padding: 13,
         borderRadius: 30,
-        position: 'relative'
+        width: 300,
+        position: "relative",
     },
 
     viewCartText: {
         color: 'white',
         fontSize: 20,
+    },
+
+    viewCartAmount: {
+        color: 'white',
+        fontSize: 20,
+        position: "absolute",
+        right: 20,
+        color: "white",
+        fontSize: 15,
+        top: 17,
     }
 });

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import React from 'react';
 import { Divider } from 'react-native-elements';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const menuItems = [
@@ -28,14 +28,14 @@ const menuItems = [
     },
 
     {
-        title: 'Chicken Burger',
+        title: 'Vegan Pizza',
         image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        price: '11.00',
-        description: 'Combination of tastes and textures sweet, sour, salt with a bit of crunch.'
+        price: '21.50',
+        description: 'A flattened disk some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese.'
     },
 
     {
-        title: 'Beef Steak',
+        title: 'Vagn Burgers',
         image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
         price: '21.50',
         description: 'A flattened disk some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese.'
@@ -51,8 +51,18 @@ export default function MenuItem({ restaurantName }) {
 
     const selectedItem = (item, checkboxValue) => dispatch({
         type: 'ADD_TO_CART',
-        payload: { ...item, restaurantName: restaurantName, checkboxValue: checkboxValue }
+        payload: {
+            ...item, restaurantName: restaurantName,
+            checkboxValue: checkboxValue
+        }
     });
+
+
+    const cartItems = useSelector((state) => state.cartReducer.selectedItems.items)
+
+    const isFoodInCart = (menuItem, cartItems) => {
+        return Boolean(cartItems.find((item) => item.title === menuItem.title))
+    }
 
 
     return (
@@ -63,9 +73,13 @@ export default function MenuItem({ restaurantName }) {
                         <View style={styles.menuItems}>
 
                             {/* ----------- CHECKBOX ----------- */}
-                            <BouncyCheckbox iconStyle={{ borderColor: "lightgray" }}
-                                onPress={(checkboxValue) => selectedItem(menuItem, checkboxValue)}
-                                fillColor='red'
+                            <BouncyCheckbox
+                                iconStyle={{ borderColor: "lightgray" }}
+                                fillColor="green"
+                                onPress={(checkboxValue) =>
+                                    selectedItem(menuItem, checkboxValue)
+                                }
+                                isChecked={isFoodInCart(menuItem, cartItems)}
                             />
 
                             {/* ----------- FOOD INFO ----------- */}
