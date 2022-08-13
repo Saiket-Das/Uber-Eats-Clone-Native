@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     },
 
     menuInfo: {
-        width: 240,
+        width: 212,
     },
 
     restaurantTitle: {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     restaurantImage: {
         width: 100,
         height: 100,
-        borderRadius: 8
+        borderRadius: 8,
     },
 
 })

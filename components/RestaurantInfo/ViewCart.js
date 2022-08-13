@@ -1,20 +1,32 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 
 
 export default function ViewCart() {
 
+    const items = useSelector((state) => state.cartReducer.selectedItems.items)
+    const total = items.map((item) => Number(item.price.replace('$', ''))).reduce((prev, curr) => prev + curr, 0);
+    const totalUSD = total.toLocaleString('en', {
+        style: 'currency',
+        currency: 'USD'
+    })
+
+
     return (
-        <View style={styles.viewCart}>
+        <>
+            {total ?
+                <View style={styles.viewCart}>
 
-            <View style={styles.viewCartComp}>
-                <TouchableOpacity style={styles.touchableComp}>
-                    <Text style={styles.viewCartText}>View Cart</Text>
-                </TouchableOpacity>
-            </View>
+                    <View style={styles.viewCartComp}>
+                        <TouchableOpacity style={styles.touchableComp}>
+                            <Text style={styles.viewCartText}>View Cart {totalUSD}</Text>
+                        </TouchableOpacity>
+                    </View>
 
-        </View>
+                </View> : <></>}
+        </>
     )
 }
 
@@ -30,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         position: 'absolute',
-        bottom: 200,
+        bottom: 150,
         zIndex: 999
     },
 
