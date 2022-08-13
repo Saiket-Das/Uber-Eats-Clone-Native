@@ -1,9 +1,11 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function ViewCart() {
-    return (
 
+
+export default function ViewCart() {
+
+    return (
         <View style={styles.viewCart}>
 
             <View style={styles.viewCartComp}>
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         position: 'absolute',
-        bottom: 140,
+        bottom: 200,
         zIndex: 999
     },
 

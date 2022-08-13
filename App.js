@@ -1,5 +1,5 @@
 
-import RootNavigation from './Navigation';
+import RootNavigation from './navigation';
 // import Home from './screens/Home';
 // import RestaurantInfo from './screens/RestaurantInfo';
 
