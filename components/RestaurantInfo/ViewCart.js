@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native'
 import { useSelector } from 'react-redux';
 import OrderItem from './OrderItem';
+import firebase from '../../firebase';
 
 
 
@@ -16,6 +17,25 @@ export default function ViewCart() {
         style: 'currency',
         currency: 'USD'
     });
+
+
+    const addOrderToFireBase = () => {
+        // setLoading(true);
+        const db = firebase.firestore();
+        db.collection("orders")
+            .add({
+                items: items,
+                restaurantName: restaurantName,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+        setModalVisible(false)
+        // .then(() => {
+        //     setTimeout(() => {
+        //         setLoading(false);
+        //         navigation.navigate("OrderCompleted");
+        //     }, 2500);
+        // });
+    };
 
 
     const checkoutModal = () => {
@@ -37,8 +57,10 @@ export default function ViewCart() {
 
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <TouchableOpacity style={styles.checkoutTouchButton}
-                                onPress={() => setModalVisible(false)}>
+                                onPress
+                                ={() => addOrderToFireBase()}>
                                 <Text style={styles.checkoutText}>Checkout</Text>
+
                             </TouchableOpacity>
                         </View>
 
@@ -95,7 +117,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         position: 'absolute',
-        bottom: 150,
+        bottom: 200,
         zIndex: 999
     },
 
