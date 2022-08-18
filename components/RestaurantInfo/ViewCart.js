@@ -6,7 +6,7 @@ import firebase from '../../firebase';
 
 
 
-export default function ViewCart() {
+export default function ViewCart({ navigation }) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -29,10 +29,10 @@ export default function ViewCart() {
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             })
         setModalVisible(false)
+        navigation.navigate("OrderCompleted");
         // .then(() => {
         //     setTimeout(() => {
         //         setLoading(false);
-        //         navigation.navigate("OrderCompleted");
         //     }, 2500);
         // });
     };
