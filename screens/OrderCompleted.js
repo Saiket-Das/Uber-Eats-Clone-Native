@@ -1,62 +1,87 @@
-import React from 'react'
-import { Text, SafeAreaView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { useSelector } from 'react-redux';
-import { StyleSheet } from 'react-native';
 import LottieView from "lottie-react-native";
-
+import MenuItems from "../components/RestaurantInfo/MenuItem";
+import firebase from '../firebase';
 
 export default function OrderCompleted() {
 
-    const { items, restaurantName } = useSelector((state) => state.cartReducer.selectedItems);
-
-    const total = items.map((item) => Number(item.price.replace('$', ''))).reduce((prev, curr) => prev + curr, 0);
-    const totalUSD = total.toLocaleString('en', {
-        style: 'currency',
-        currency: 'USD'
+    const [lastOrder, setLastOrder] = useState({
+        items: [
+            {
+                title: "Bologna",
+                description: "With butter lettuce, tomato and sauce bechamel",
+                price: "$13.50",
+                image:
+                    "https://www.modernhoney.com/wp-content/uploads/2019/08/Classic-Lasagna-14-scaled.jpg",
+            },
+        ],
     });
 
+    const { items, restaurantName } = useSelector(
+        (state) => state.cartReducer.selectedItems
+    );
+
+    const total = items
+        .map((item) => Number(item.price.replace("$", "")))
+        .reduce((prev, curr) => prev + curr, 0);
+
+    const totalUSD = total.toLocaleString("en", {
+        style: "currency",
+        currency: "USD",
+    });
+
+    useEffect(() => {
+        const db = firebase.firestore();
+        const unsubscribe = db
+            .collection("orders")
+            .orderBy("createdAt", "desc")
+            .limit(1)
+            .onSnapshot((snapshot) => {
+                snapshot.docs.map((doc) => {
+                    console.log(doc.data())
+                    setLastOrder(doc.data());
+                });
+            });
+
+        return () => unsubscribe();
+    }, []);
+
+
     return (
-        <SafeAreaView style={styles.OrderCompletedCon}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+            <View style={{ margin: 15, alignItems: "center", height: "100%", }} >
 
-            <LottieView style={styles.checkLottieView}
-                source={require('../assets/animations/check-mark.json')}
-                autoPlay
-                speed={0.5}
-                loop={false}
-            />
+                <LottieView
+                    style={{ height: 100, alignSelf: "center", marginBottom: 30 }}
+                    source={require('../assets/animations/check-mark.json')}
+                    speed={0.5}
+                    // loop={false}
+                    autoPlay
+                />
 
-            <Text style={styles.orderCompletedText}>Your order at {restaurantName} has been placed for
-                <Text style={{ fontWeight: '600' }}> ${total.toFixed(2)}</Text>
-            </Text>
+                <Text style={{ fontSize: 17 }}>Your order at {restaurantName} has been placed for
+                    <Text style={{ fontWeight: '600' }}> {totalUSD}</Text>
+                </Text>
 
-            <LottieView style={styles.cookingLottieView}
-                source={require('../assets/animations/cooking.json')}
-                autoPlay
-                speed={0.5}
-            />
-        </SafeAreaView>
+                <ScrollView>
+                    <MenuItems
+                        menuItems={lastOrder.items}
+                        hideCheckbox={true}
+                        marginLeft={10}
+                    />
+
+                    <LottieView
+                        style={{ height: 200, alignSelf: "center" }}
+                        source={require('../assets/animations/cooking.json')}
+                        speed={0.5}
+                        autoPlay
+
+
+                    />
+                </ScrollView>
+            </View>
+        </SafeAreaView >
     )
 }
-
-
-
-const styles = StyleSheet.create({
-    OrderCompletedCon: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-
-    checkLottieView: {
-        height: 100,
-        alignSelf: 'center',
-        marginBottom: 30
-    },
-    orderCompletedText: {
-        paddingHorizontal: 15,
-        fontSize: 16,
-    },
-    cookingLottieView: {
-        height: 200,
-        alignSelf: 'center',
-    }
-});

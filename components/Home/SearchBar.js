@@ -8,7 +8,6 @@ import { GOOGLE_PLACES_AUTOCOMPLETE_KEY } from "@env"
 
 
 export default function SearchBar({ setCity }) {
-    console.log(GOOGLE_PLACES_AUTOCOMPLETE_KEY);
     return (
         <View
             style={{

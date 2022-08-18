@@ -3,12 +3,14 @@ import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native'
 import { useSelector } from 'react-redux';
 import OrderItem from './OrderItem';
 import firebase from '../../firebase';
+import LottieView from "lottie-react-native";
 
 
 
 export default function ViewCart({ navigation }) {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const { items, restaurantName } = useSelector((state) => state.cartReducer.selectedItems);
 
@@ -20,7 +22,7 @@ export default function ViewCart({ navigation }) {
 
 
     const addOrderToFireBase = () => {
-        // setLoading(true);
+        setLoading(true);
         const db = firebase.firestore();
         db.collection("orders")
             .add({
@@ -28,13 +30,12 @@ export default function ViewCart({ navigation }) {
                 restaurantName: restaurantName,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             })
-        setModalVisible(false)
-        navigation.navigate("OrderCompleted");
-        // .then(() => {
-        //     setTimeout(() => {
-        //         setLoading(false);
-        //     }, 2500);
-        // });
+            .then(() => {
+                setTimeout(() => {
+                    setLoading(false);
+                    navigation.navigate("OrderCompleted");
+                }, 2500);
+            });
     };
 
 
@@ -57,8 +58,11 @@ export default function ViewCart({ navigation }) {
 
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <TouchableOpacity style={styles.checkoutTouchButton}
-                                onPress
-                                ={() => addOrderToFireBase()}>
+                                onPress={() => {
+                                    addOrderToFireBase();
+                                    setModalVisible(false);
+                                }}
+                            >
                                 <Text style={styles.checkoutText}>Checkout</Text>
 
                             </TouchableOpacity>
@@ -101,6 +105,20 @@ export default function ViewCart({ navigation }) {
                 :
                 <></>
             }
+
+            {loading
+                ?
+                (<View style={styles.lottieViewCon}>
+                    <LottieView style={styles.scannerLottieView}
+                        source={require('../../assets/animations/scanner.json')}
+                        autoPlay
+                        speed={3}
+                    // loop={false}
+                    />
+                </View>)
+                :
+                (<></>)}
+
         </>
     )
 }
@@ -200,5 +218,20 @@ const styles = StyleSheet.create({
     checkoutText: {
         color: 'white',
         fontSize: 18
+    },
+
+    lottieViewCon: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'black',
+        position: 'absolute',
+        opacity: 0.7,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    scannerLottieView: {
+        height: 200,
+        // alignSelf: 'center',
     }
 });
