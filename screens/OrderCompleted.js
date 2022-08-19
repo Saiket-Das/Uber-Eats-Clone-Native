@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux';
 import LottieView from "lottie-react-native";
 import MenuItems from "../components/RestaurantInfo/MenuItem";
 import firebase from '../firebase';
+import checkMarkBoxLottie from '../assets/animations/85185-checkmark.json';
+import scannerLottie from '../assets/animations/6519-cooking.json';
+
+
+
 
 export default function OrderCompleted() {
 
@@ -40,7 +45,6 @@ export default function OrderCompleted() {
             .limit(1)
             .onSnapshot((snapshot) => {
                 snapshot.docs.map((doc) => {
-                    console.log(doc.data())
                     setLastOrder(doc.data());
                 });
             });
@@ -55,13 +59,13 @@ export default function OrderCompleted() {
 
                 <LottieView
                     style={{ height: 100, alignSelf: "center", marginBottom: 30 }}
-                    source={require('../assets/animations/check-mark.json')}
+                    source={checkMarkBoxLottie}
                     speed={0.5}
                     // loop={false}
                     autoPlay
                 />
 
-                <Text style={{ fontSize: 17 }}>Your order at {restaurantName} has been placed for
+                <Text style={{ fontSize: 18, padding: 3 }}>Your order at {restaurantName} has been placed for
                     <Text style={{ fontWeight: '600' }}> {totalUSD}</Text>
                 </Text>
 
@@ -69,12 +73,11 @@ export default function OrderCompleted() {
                     <MenuItems
                         menuItems={lastOrder.items}
                         hideCheckbox={true}
-                        marginLeft={10}
                     />
 
                     <LottieView
                         style={{ height: 200, alignSelf: "center" }}
-                        source={require('../assets/animations/cooking.json')}
+                        source={scannerLottie}
                         speed={0.5}
                         autoPlay
 
