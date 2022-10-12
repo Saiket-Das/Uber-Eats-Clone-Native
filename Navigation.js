@@ -36,7 +36,7 @@ import RestaurantInfo from './screens/RestaurantInfo';
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/store";
 import OrderCompleted from "./screens/OrderCompleted";
-// import OrderCompleted from "./screens/OrderCompleted";
+
 
 const store = configureStore();
 
