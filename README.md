@@ -4,7 +4,10 @@
 * React Native
 * Expo
 * React Navigation 
-* Saurav Tech News Api - **https://saurav.tech/NewsAPI/**
+* Redux
+* Place Autocomplete Places API
+* Lottie
+* Yelp API - **[https://saurav.tech/NewsAPI/](https://www.yelp.com/developers)**
 
 Note: no design library is used. The entire UI of this application is built from the ground up.
 
